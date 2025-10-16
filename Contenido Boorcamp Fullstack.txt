@@ -1,0 +1,112 @@
+Fundamentos del Desarrollo Web
+	Dia 1
+		Por que es importante estudiar programacion en un tiempo de IA?
+			1. La IA necsita programadores
+			2. Evolucion constante del software
+			3. Carrera y oportunidades
+			4. Pensamiento critico y resolucion de problemas
+			5. Emprendimiento: construccion de propios proyyectos
+		
+		Que es la programacion?
+		Frontend y Backend
+		Que es un fullstack?
+		Explicacion del stack: HTML + CSS + JS + Backend + React Fronted + DB
+		Presentacion del Proyecto: DevJobs, fase inicial
+			stitch.withgoogle.com -> Herramienta para maquetar proyectos con un prompt, eg:
+				"Crear un diseno para crear la web de DevJobs, una web para busqueda de empleos para programadores"
+
+		Requisitos basicos de conocimientos
+		Requisitos tecnicos/instalaciones
+
+
+		Tema 1: HTML: Estructura, etiquetas basicas, semantica
+		Tema 2: CSS
+
+Crear Repositorio
+Introducción a la Web
+Herramientas de desarrollo: Navegador y VSCode
+Git y GitHub
+Primeros pasos con JavaScript
+Primer Ejercicio
+
+
+HTML y CSS
+Fundamentos de HTML y CSS
+Creando tu primera página web
+Importancia de la semántica
+Despliegue a producción
+Eventos e interacciones con JavaScript
+
+
+React
+¿Qué es React?
+Componentes de React
+Estado y props
+Manejo de eventos en React
+Comunicación entre componentes
+Hooks básicos: useState y useEffect
+Uso de linter
+
+
+Estado Global y React Router
+Conceptos básicos de Redux
+Acciones, reducers y store
+Uso de Redux con React
+React Router
+Custom Hooks
+
+
+Comunicación con el Servidor
+Fundamentos de REST
+Fetch y Axios para llamadas HTTP
+Manejo de respuestas y errores
+Renderizado condicional y listas en React
+JSON y Promesas
+Asincronicidad en JavaScript
+
+
+Programación de Servidores con Node.js y Express
+Node.js
+Configuración básica de un servidor Express
+Rutas y middleware en Express
+Crear y consumir una API RESTful
+MongoDB y Mongoose
+
+
+Testing
+Pruebas en JavaScript
+Pruebas unitarias con Jest
+Pruebas de componentes con React Testing Library
+Mocking y pruebas de integración
+Buenas prácticas de testing
+Automatización de tareas con npm scripts
+
+
+TypeScript
+Fundamentos de TypeScript
+Tipos e interfaces
+Integración de TypeScript con React
+Beneficios de usar TypeScript en proyectos grandes
+Migración de proyectos JavaScript a TypeScript
+
+
+SQL
+SQL
+Creación de bases de datos
+Manipulación de datos con SQL
+Uso de ORM como Sequelize
+Migraciones y seeding de datos
+
+
+CI/CD
+CI/CD
+Configuración de CI/CD con GitHub Actions
+Desplegar aplicaciones con GitHub Actions
+
+
+DevOps y Docker
+DevOps
+Conceptos básicos de Docker
+Creación de imágenes Docker
+Uso de Docker Compose
+Integración de Docker en el flujo de trabajo de desarrollo

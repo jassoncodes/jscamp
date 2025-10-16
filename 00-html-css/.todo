@@ -1,0 +1,34 @@
+# General
+
+- Use css selectors
+
+# Search Results page
+
+- Update file structure and create css file for this web
+- Add links functionality
+- Add Javascript to buttons using buble event listening
+- Make filters work:
+- Fix jobs listing article card styles
+
+  - Sync URL
+  - Add event listener "change" to filters
+  - Add event listener "submit" to form
+
+- Article tag: > data-xyz >> jobs = document.querySelectorAll('.job-listing-card') jobs.forEeach(job.dataset.xyz)
+
+  - Forma mejor usando classList.toggle
+
+  - Seleccionar todos los article de jobs
+  - Escuchar el evento del cambio
+  - Iterar entre todos los elementos y recuperar informacion del dataset mediante (data-xyz)
+
+- Filters arrow: using background-image
+
+- Add data.json file as data store for the job listing
+- Use fetch javascript method to get data based on filters selected
+
+# Ejercicios
+
+- Make search ipnut work: Add event listener "input" to search input and filter articles
+- Make the other two filter and focus filtering by an array of technologies
+- dynamic pagination
