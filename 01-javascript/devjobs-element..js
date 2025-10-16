@@ -20,12 +20,14 @@ class DevJobsAvatar extends HTMLElement {
         <!-- Estilos aislados del componente -->
         <style>
             img {
-
+              width: ${size}px;
+              height: ${size}px;
+              border-radius: 9999px;
             }
         </style>
         <img 
             src="${url}"
-            class="avatar"
+            class="avatar de ${username}"
             size="${size}"
         />
         `;
