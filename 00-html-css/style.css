@@ -128,7 +128,7 @@ header div {
 
 
 
-.nav-button {
+.primary-button {
     background-color: var(--primary-dark);
     color: #09f;
     font-weight: 500;
@@ -141,21 +141,23 @@ header div {
 }
 
 .secondary-button {
-    padding: 0.5rem 1rem;
-    background-color: var(--primary-hover);
-    border-radius: 0.5rem;
+    padding: .75rem 1.5rem;
+    border-radius: .5rem;
+    background-color: var(--primary-light);
+    border: none;
     color: var(--text-primary);
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1.1rem;
-    font-weight: 700;
     cursor: pointer;
+    font-weight: 700;
+    white-space: nowrap;
+    font-family: inherit;
+    transition: background-color 0.2s;
 
     &:hover,
     &:focus,
     &:active {
-        outline: none;
-        background-color: var(--primary-light);
+        background-color: var(--primary-hover);
+        outline: 2px solid white;
+        outline-offset: 2px;
     }
 }
 
@@ -201,7 +203,8 @@ form input {
     margin-left: 7px;
 }
 
-input[type="text"] {
+
+.search-bar {
     background-color: var(--input-bg);
 
     &::placeholder {
@@ -214,30 +217,8 @@ form svg {
     height: 20px;
 }
 
-form button[type="submit"] {
-    padding: .75rem 1.5rem;
-    border-radius: .5rem;
-    background-color: var(--primary-light);
-    border: none;
-    color: var(--text-primary);
-    cursor: pointer;
-    font-weight: 700;
-    white-space: nowrap;
-    font-family: inherit;
-    transition: background-color 0.2s;
-}
-
-form button[type="submit"]:hover,
-form button[type="submit"]:focus {
-    background-color: var(--primary-hover);
-    outline: 2px solid white;
-    outline-offset: 2px;
-}
-
-
 /* features */
-
-main>section:nth-child(2) {
+.features {
 
     padding-inline: 1rem;
     background-color: var(--background);
@@ -269,27 +250,29 @@ main>section:nth-child(2) {
     }
 }
 
-main>section:nth-child(2) h2 {
+.features h2 {
     font-size: 1.875rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 1rem;
 }
 
-main>section:nth-child(2)>div>div:first-child>p {
+.features p {
     font-size: 1.125rem;
+    text-align: center;
     color: var(--text-muted);
     max-width: 42rem;
     margin: 0 auto;
+    padding-bottom: 1rem;
 }
 
-main>section:nth-child(2) section {
+.cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 16px;
 }
 
-article {
+.card {
     background-color: var(--card-bg);
     padding: 2rem;
     margin-bottom: 16px;
@@ -337,24 +320,5 @@ body>footer {
     small {
         color: var(--text-muted);
         font-size: 0.875rem;
-    }
-
-    &:has(>nav) {
-        border: none;
-
-        nav {
-            gap: 1.75rem;
-        }
-
-        a {
-            font-weight: 300;
-        }
-
-        &>nav>a.active {
-            background-color: var(--primary-light);
-            padding: .025rem .70rem;
-            border-radius: .25rem;
-            font-weight: 600;
-        }
     }
 }
