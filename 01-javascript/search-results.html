@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados de busqueda</title>
+    <link rel="stylesheet" href="../00-html-css/style.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -13,7 +14,7 @@
     <!-- Header -->
     <header>
         <h2>DevJobs</h2>
-        <nav>
+        <nav class="menu">
             <a href="#">Inicio</a>
             <a href="#">Buscar</a>
             <a href="#">Empleos</a>
@@ -49,7 +50,8 @@
                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                     <path d="M21 21l-6 -6" />
                 </svg>
-                <input type="text" name="" id="" placeholder="Buscar empleos por titulo, habilidad o empresa">
+                <input class="search-bar" type="text" name="" id=""
+                    placeholder="Buscar empleos por titulo, habilidad o empresa">
             </form>
             <div class="filters">
                 <select>
@@ -68,7 +70,7 @@
         </search>
         <output>
             <h2>Resultados de la busqueda</h2>
-            <article>
+            <article class="job-card">
                 <div>
                     <h3>Ingeniero de Software</h3>
                     <span>Tech Solutions Inc.</span><span>Remoto</span>
@@ -76,9 +78,9 @@
                         Javascript, React y Node.js. El candidato ideal debe ser capaz de trabajar en equipo y tener
                         buenas habilidades de comunicacion</p>
                 </div>
-                <button>Aplicar</button>
+                <button class="secondary-button">Aplicar</button>
             </article>
-            <article>
+            <article class="job-card">
                 <div>
                     <h3>Analista de Datos</h3>
                     <span>Data Driven Co.</span><span>Ciudad de Mexico</span>
@@ -86,9 +88,9 @@
                         datos
                         y herramientas de visualizacion. Se requiere conocimiento en SQL, Python y R.</p>
                 </div>
-                <button>Aplicar</button>
+                <button class="secondary-button">Aplicar</button>
             </article>
-            <article>
+            <article class="job-card">
                 <div>
                     <h3>Desarrollador de Aplicaciones Moviles</h3>
                     <span>Mobile Apps Ltd.</span><span>Guadalajara</span>
@@ -97,9 +99,9 @@
                         usuario.
                     </p>
                 </div>
-                <button>Aplicar</button>
+                <button class="secondary-button">Aplicar</button>
             </article>
-            <article>
+            <article class="job-card">
                 <div>
                     <h3>Ingeniero DevOps</h3>
                     <span>Cloud Services S.A.</span><span>Remoto</span>
@@ -107,7 +109,7 @@
                         la
                         nube</p>
                 </div>
-                <button>Aplicar</button>
+                <button class="secondary-button">Aplicar</button>
             </article>
         </output>
 
