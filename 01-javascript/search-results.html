@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados de busqueda</title>
     <link rel="stylesheet" href="../00-html-css/style.css">
-    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="../01-javascript/index.js"></script>
 </head>
 
 <body>
@@ -15,9 +15,9 @@
     <header>
         <h2>DevJobs</h2>
         <nav class="menu">
-            <a href="#">Inicio</a>
-            <a href="#">Buscar</a>
-            <a href="#">Empleos</a>
+            <a href="../00-html-css/index.html">Inicio</a>
+            <a href="../01-javascript/search-results.html">Buscar</a>
+            <a href="../01-javascript/search-results.html">Empleos</a>
             <a href="#">Salarios</a>
         </nav>
         <div>
@@ -68,7 +68,7 @@
                 </select>
             </div>
         </search>
-        <output>
+        <output class="searchResultsContainer">
             <h2>Resultados de la busqueda</h2>
             <article class="job-card">
                 <div>
@@ -78,7 +78,7 @@
                         Javascript, React y Node.js. El candidato ideal debe ser capaz de trabajar en equipo y tener
                         buenas habilidades de comunicacion</p>
                 </div>
-                <button class="secondary-button">Aplicar</button>
+                <button class="apply-job-btn secondary-button">Aplicar</button>
             </article>
             <article class="job-card">
                 <div>
@@ -88,7 +88,7 @@
                         datos
                         y herramientas de visualizacion. Se requiere conocimiento en SQL, Python y R.</p>
                 </div>
-                <button class="secondary-button">Aplicar</button>
+                <button class="apply-job-btn secondary-button">Aplicar</button>
             </article>
             <article class="job-card">
                 <div>
@@ -99,7 +99,7 @@
                         usuario.
                     </p>
                 </div>
-                <button class="secondary-button">Aplicar</button>
+                <button class="apply-job-btn secondary-button">Aplicar</button>
             </article>
             <article class="job-card">
                 <div>
@@ -109,22 +109,26 @@
                         la
                         nube</p>
                 </div>
-                <button class="secondary-button">Aplicar</button>
+                <button class="apply-job-btn secondary-button">Aplicar</button>
             </article>
         </output>
 
+        <!-- section pagination footer-->
+        <footer>
+            <nav class="pagination">
+                <a href="">&lt;</a>
+                <a class="active" href="">1</a>
+                <a href="">2</a>
+                <a href="">3</a>
+                <a href="">4</a>
+                <a href="">5</a>
+                <a href="">&gt;</a>
+            </nav>
+        </footer>
     </main>
-    <!-- Footer/Pagination -->
+    <!-- Page Footer -->
     <footer>
-        <nav>
-            <a href="">&lt;</a>
-            <a class="active" href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <a href="">4</a>
-            <a href="">5</a>
-            <a href="">&gt;</a>
-        </nav>
+        <small>&copy; DevJobs. Todos los derechos reservados.</small>
     </footer>
 
 </body>

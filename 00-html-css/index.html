@@ -7,6 +7,7 @@
     <meta name="description" content="Encuentra las mejores ofertas de trabajo para desarrolladores en DevJobs.">
     <!-- link to css -->
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="../01-javascript/index.js"></script>
     <title>DevJobs - Inicio</title>
 </head>
 
@@ -16,9 +17,9 @@
     <header>
         <h2>DevJobs</h2>
         <nav class="menu">
-            <a href="#">Inicio</a>
-            <a href="#">Buscar</a>
-            <a href="#">Empleos</a>
+            <a href="../00-html-css/index.html">Inicio</a>
+            <a href="../01-javascript/search-results.html">Buscar</a>
+            <a href="../01-javascript/search-results.html">Empleos</a>
             <a href="#">Salarios</a>
         </nav>
         <div>
@@ -34,7 +35,7 @@
             <h1>Encuentra el trabajo de tus suenos</h1>
             <p>Unete a la comunidad mas grande de desarrolladores y encuentra tu proxima oportunidad</p>
 
-            <form action="" role="search">
+            <form id="mainSearchForm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icons-tabler-outline icon-tabler-search">
@@ -42,9 +43,9 @@
                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                     <path d="M21 21l-6 -6" />
                 </svg>
-                <input class="search-bar" type="text" name="" id=""
+                <input class="search-bar" type="text" name="mainSearchBar" id="mainSearchBar"
                     placeholder="Buscar empleos por titulo, habilidad o empresa">
-                <button class="secondary-button" type="submit">Buscar</button>
+                <button id="main-search" class="secondary-button" type="submit">Buscar</button>
             </form>
         </section>
 
@@ -100,7 +101,7 @@
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Page Footer -->
     <footer>
         <small>&copy; DevJobs. Todos los derechos reservados.</small>
     </footer>
