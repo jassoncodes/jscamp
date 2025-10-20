@@ -17,6 +17,9 @@ document
   ?.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.target.classList.contains("apply-job-btn")) {
-      console.log("Aplicado");
+      e.target.classList.add("is-applied");
     }
   });
+
+const filter = document.querySelectorAll(".filter");
+console.log(filter);

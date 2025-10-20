@@ -22,8 +22,6 @@
   - [ ] Escuchar el evento del cambio
   - [ ] Iterar entre todos los elementos y recuperar informacion del dataset mediante (data-xyz)
 
-- [ ] Filters arrow: using background-image
-
 - [ ] Add data.json file as data store for the job listing
 - [ ] Use fetch javascript method to get data based on filters selected
 

@@ -354,13 +354,25 @@ main search {
 select {
     border: none;
     border-radius: .5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.625rem 1.25rem;
     background: var(--input-bg);
     color: var(--text-primary);
+    font-size: 0.875rem;
     cursor: pointer;
     border-right: 15px solid transparent;
     outline: none;
+
+    &:hover {
+        background-color: var(--primary-hover);
+        color: white;
+    }
+
+    &:focus {
+        outline: 2px solid #1173d4;
+        outline-offset: 2px;
+    }
 }
+
 
 .job-card {
     display: flex;
@@ -392,6 +404,8 @@ select {
     button.is-applied {
         background: #4caf50;
         pointer-events: none;
+
+        transition: background .75s;
     }
 }
 
