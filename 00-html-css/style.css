@@ -351,6 +351,11 @@ main search {
 }
 
 /* select form control */
+select,
+::picker(select) {
+    appearance: base-select;
+}
+
 select {
     border: none;
     border-radius: .5rem;
@@ -371,6 +376,28 @@ select {
         outline: 2px solid #1173d4;
         outline-offset: 2px;
     }
+}
+
+option {
+    background: var(--primary);
+    padding: 0.25rem .5rem;
+    color: var(--text-muted);
+
+    &:hover {
+        background: var(--primary-hover);
+    }
+
+    &:checked {
+        background: var(--primary-dark);
+        color: white;
+    }
+}
+
+::picker(select) {
+    border-radius: .5rem;
+    border: none;
+    margin-bottom: .2rem;
+    margin-top: .2rem;
 }
 
 

@@ -21,5 +21,8 @@ document
     }
   });
 
-const filter = document.querySelectorAll(".filter");
-console.log(filter);
+document.querySelectorAll(".filter").forEach((filter) => {
+  filter.addEventListener("change", () => {
+    console.log(filter.value);
+  });
+});
