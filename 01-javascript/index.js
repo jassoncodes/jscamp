@@ -1,19 +1,59 @@
-// main search input event listener
-// document.querySelector("#main-search").addEventListener("click", (e) => {
-//   e.preventDefault();
-//   const searchValue = document.querySelector("#main-search-bar");
-//   console.log(searchValue);
-// });
+import "./devjobs-element.js";
+
+const RESULTS_PER_PAGE = 3;
+
+const getJobs = async () => {
+  const jobsContainer = document.querySelector(".search-results-container");
+
+  await fetch("./data.json")
+    .then((result) => {
+      return result.json();
+    })
+    .then((jobs) => {
+      jobs.forEach((job) => {
+        //construct article
+        const jobDataTech = Array.isArray(job.data.technology)
+          ? job.data.technology.join(", ")
+          : job.data.technology;
+
+        const article = document.createElement("article");
+        article.className = "job-card";
+        article.dataset.modalidad = job.data.modalidad;
+        article.dataset.tech = jobDataTech;
+        article.dataset.nivel = job.data.nivel;
+
+        article.innerHTML = `
+          <article>
+            <h3>${job.titulo}</h3>
+            <span>${jobDataTech}</span>
+            <span>${job.ubicacion}</span>
+            <p>${job.descripcion}</p>
+          </article>
+          <button class="apply-job-btn secondary-button">Aplicar</button>
+        `;
+
+        jobsContainer.appendChild(article);
+      });
+    });
+};
 
 // main search form event listener
-document.querySelector("#mainSearchForm")?.addEventListener("submit", (e) => {
+const mainSearchForm = document.querySelector("#main-search-form");
+
+mainSearchForm?.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log(e);
+  const formData = new FormData(mainSearchForm);
+  const qry = formData.get("home-search-bar").trim();
+  if (qry) {
+    window.location.href = `../01-javascript/search-results.html?search=${encodeURIComponent(
+      qry
+    )}`;
+  }
 });
 
-//searchResultsContainer event listener
+//search-results-container event listener for apply buttons
 document
-  .querySelector(".searchResultsContainer")
+  .querySelector(".search-results-container")
   ?.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.target.classList.contains("apply-job-btn")) {
@@ -21,8 +61,47 @@ document
     }
   });
 
-document.querySelectorAll(".filter").forEach((filter) => {
-  filter.addEventListener("change", () => {
-    console.log(filter.value);
+//filter jobs function for filters change event
+const filterJobs = (filter) => {
+  const jobs = document.querySelectorAll(".job-card");
+  jobs.forEach((job) => {
+    console.log(job.getAttribute("data-tech").includes(filter));
+    const isShown =
+      filter === "" ||
+      filter === job.getAttribute("data-modalidad") ||
+      job.getAttribute("data-tech").includes(filter) ||
+      filter === job.getAttribute("data-nivel");
+    job.classList.toggle("is-hidden", isShown === false);
   });
+};
+
+const jobSearchForm = document.querySelector("#jobs-search-form");
+
+//search results page form event listener
+jobSearchForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  jobSearchForm.submit();
+});
+
+//search results page filters event listener
+document.querySelectorAll(".filter").forEach((filter) => {
+  filter.addEventListener("change", (e) => {
+    e.preventDefault();
+    filterJobs(e.target.value);
+    // jobSearchForm.submit();
+  });
+});
+
+//search result page content load event listener
+document.addEventListener("DOMContentLoaded", () => {
+  // validacion para que se ejecute solo en la pagina de search-results
+  if (jobSearchForm) {
+    getJobs();
+    const params = new URLSearchParams(window.location.search);
+    const search = params.get("search");
+    const searchBar = document.getElementById("job-search-bar");
+    if (search && searchBar) {
+      searchBar.value = decodeURIComponent(search);
+    }
+  }
 });
