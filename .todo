@@ -1,10 +1,12 @@
 # Pending
 
 - [ ] Implement responsive design
+- [ ] Make search bars actually perform searches
 
 # Search Results page
 
 - [ ] Use fetch javascript method to get data based on filters selected
+- [ ] Add loading feature on search-results.html page before while fetching data
 
 # Ejercicios
 

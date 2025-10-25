@@ -1,28 +1,35 @@
 import "./devjobs-element.js";
 
 const RESULTS_PER_PAGE = 3;
+let jobs = [];
 
-const getJobs = async () => {
-  const jobsContainer = document.querySelector(".search-results-container");
+/**
+ * Fetchs jobs data
+ * @returns jobs
+ */
+const fetchJobs = async () => {
+  return await fetch("./data.json").then((result) => result.json());
+};
 
-  await fetch("./data.json")
-    .then((result) => {
-      return result.json();
-    })
-    .then((jobs) => {
-      jobs.forEach((job) => {
-        //construct article
-        const jobDataTech = Array.isArray(job.data.technology)
-          ? job.data.technology.join(", ")
-          : job.data.technology;
+/**
+ * Formats jobs data into <article> elements
+ * @param {json} jobsData jobs list
+ * @returns jobs articles elements
+ */
+const fortmatJobsArticle = (jobsData) => {
+  return jobsData.map((job) => {
+    //construct article
+    const jobDataTech = Array.isArray(job.data.technology)
+      ? job.data.technology.join(", ")
+      : job.data.technology;
 
-        const article = document.createElement("article");
-        article.className = "job-card";
-        article.dataset.modalidad = job.data.modalidad;
-        article.dataset.tech = jobDataTech;
-        article.dataset.nivel = job.data.nivel;
+    const article = document.createElement("article");
+    article.className = "job-card";
+    article.dataset.modalidad = job.data.modalidad;
+    article.dataset.tech = jobDataTech;
+    article.dataset.nivel = job.data.nivel;
 
-        article.innerHTML = `
+    article.innerHTML = `
           <article>
             <h3>${job.titulo}</h3>
             <span>${jobDataTech}</span>
@@ -31,10 +38,8 @@ const getJobs = async () => {
           </article>
           <button class="apply-job-btn secondary-button">Aplicar</button>
         `;
-
-        jobsContainer.appendChild(article);
-      });
-    });
+    return article;
+  });
 };
 
 // main search form event listener
@@ -96,7 +101,11 @@ document.querySelectorAll(".filter").forEach((filter) => {
 document.addEventListener("DOMContentLoaded", () => {
   // validacion para que se ejecute solo en la pagina de search-results
   if (jobSearchForm) {
-    getJobs();
+    const jobs = fetchJobs().then((res) => {
+      const articles = fortmatJobsArticle(res);
+      console.log(articles);
+    });
+
     const params = new URLSearchParams(window.location.search);
     const search = params.get("search");
     const searchBar = document.getElementById("job-search-bar");
@@ -105,3 +114,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+// Pagination
