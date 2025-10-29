@@ -42,6 +42,48 @@ const fortmatJobsArticle = (jobsData) => {
   });
 };
 
+/**
+ * Renders jobs
+ * @param {*} page Page number to render
+ */
+const renderJobs = (page = 1) => {
+  // clean jobs container
+  const jobsContainer = document.querySelector(".search-results-container");
+  jobsContainer.innerHTML = "";
+
+  // prepare pagination
+  let startIndex = (page - 1) * RESULTS_PER_PAGE;
+  let endIndex = startIndex + RESULTS_PER_PAGE;
+  const jobsData = jobs.slice(startIndex, endIndex);
+  const jobsToRender = fortmatJobsArticle(jobsData);
+  jobsToRender.map((job) => {
+    jobsContainer.appendChild(job);
+  });
+};
+
+const renderPaginationControls = (totalJobsCount) => {
+  const totalPages = Math.ceil(totalJobsCount / RESULTS_PER_PAGE);
+  const paginationContainer = document.querySelector(".pagination");
+  //   <a href="">&lt;</a>
+  // <a class="active" href="">1</a>
+  // <a href="">2</a>
+  // <a href="">3</a>
+  // <a href="">4</a>
+  // <a href="">5</a>
+  // <a href="">&gt;</a>
+  paginationContainer.innerHTML = "";
+  let paginationControls = [];
+  for (let i = 0; i < totalPages; i++) {
+    paginationControls.push(`<a href="">${i + 1}</a>`);
+  }
+  paginationControls.unshift('<a href="">&lt;</a>');
+  paginationControls.push('<a href="">&gt;</a>');
+  paginationControls.map((pControl) => {
+    // paginationContainer.appendChild(pControl);
+    console.log(pControl);
+  });
+};
+
 // main search form event listener
 const mainSearchForm = document.querySelector("#main-search-form");
 
@@ -101,9 +143,11 @@ document.querySelectorAll(".filter").forEach((filter) => {
 document.addEventListener("DOMContentLoaded", () => {
   // validacion para que se ejecute solo en la pagina de search-results
   if (jobSearchForm) {
-    const jobs = fetchJobs().then((res) => {
-      const articles = fortmatJobsArticle(res);
-      console.log(articles);
+    fetchJobs().then((res) => {
+      jobs = res;
+      renderJobs(1);
+      // console.log(jobs.length);
+      renderPaginationControls(jobs.length);
     });
 
     const params = new URLSearchParams(window.location.search);
