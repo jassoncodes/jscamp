@@ -59,28 +59,50 @@ const renderJobs = (page = 1) => {
   jobsToRender.map((job) => {
     jobsContainer.appendChild(job);
   });
+  renderPaginationControls(jobs.length);
 };
 
+/**
+ * Renders pagination controls
+ * @param {int} totalJobsCount
+ */
 const renderPaginationControls = (totalJobsCount) => {
   const totalPages = Math.ceil(totalJobsCount / RESULTS_PER_PAGE);
   const paginationContainer = document.querySelector(".pagination");
-  //   <a href="">&lt;</a>
-  // <a class="active" href="">1</a>
-  // <a href="">2</a>
-  // <a href="">3</a>
-  // <a href="">4</a>
-  // <a href="">5</a>
-  // <a href="">&gt;</a>
   paginationContainer.innerHTML = "";
   let paginationControls = [];
   for (let i = 0; i < totalPages; i++) {
-    paginationControls.push(`<a href="">${i + 1}</a>`);
+    const paginationElement = document.createElement("a");
+    paginationElement.href = "";
+    paginationElement.textContent = `${i + 1}`;
+
+    paginationControls.push(paginationElement);
   }
-  paginationControls.unshift('<a href="">&lt;</a>');
-  paginationControls.push('<a href="">&gt;</a>');
+
+  const prevPageControl = document.createElement("a");
+  prevPageControl.href = "#";
+  prevPageControl.innerHTML = `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+            strokeLinecap="round" strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M15 6l-6 6l6 6" />
+        </svg>
+  `;
+  paginationControls.unshift(prevPageControl);
+
+  const nextPageControl = document.createElement("a");
+  nextPageControl.href = "#";
+  nextPageControl.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
+          strokeLinecap="round" strokeLinejoin="round"
+          className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M9 6l6 6l-6 6" />
+        </svg>`;
+  paginationControls.push(nextPageControl);
+
   paginationControls.map((pControl) => {
-    // paginationContainer.appendChild(pControl);
-    console.log(pControl);
+    paginationContainer.appendChild(pControl);
   });
 };
 
@@ -143,12 +165,12 @@ document.querySelectorAll(".filter").forEach((filter) => {
 document.addEventListener("DOMContentLoaded", () => {
   // validacion para que se ejecute solo en la pagina de search-results
   if (jobSearchForm) {
-    fetchJobs().then((res) => {
-      jobs = res;
-      renderJobs(1);
-      // console.log(jobs.length);
-      renderPaginationControls(jobs.length);
-    });
+    setTimeout(() => {
+      fetchJobs().then((res) => {
+        jobs = res;
+        renderJobs(1);
+      });
+    }, 2500);
 
     const params = new URLSearchParams(window.location.search);
     const search = params.get("search");
@@ -159,4 +181,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Pagination
+//pagination
+document.querySelector(".pagination").addEventListener("click", (e) => {
+  e.preventDefault();
+  let paginationControl = e.target;
+  let pageToRender = paginationControl.innerText;
+  renderJobs(pageToRender);
+});
+
+// work on css active pagination
