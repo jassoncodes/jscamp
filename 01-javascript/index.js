@@ -59,7 +59,6 @@ const renderJobs = (page = 1) => {
   jobsToRender.map((job) => {
     jobsContainer.appendChild(job);
   });
-  renderPaginationControls(jobs.length);
 };
 
 /**
@@ -71,9 +70,12 @@ const renderPaginationControls = (totalJobsCount) => {
   const paginationContainer = document.querySelector(".pagination");
   paginationContainer.innerHTML = "";
   let paginationControls = [];
+
+  // creating pagination control elements
   for (let i = 0; i < totalPages; i++) {
     const paginationElement = document.createElement("a");
     paginationElement.href = "";
+    paginationElement.className = "paginationControl";
     paginationElement.textContent = `${i + 1}`;
 
     paginationControls.push(paginationElement);
@@ -81,6 +83,7 @@ const renderPaginationControls = (totalJobsCount) => {
 
   const prevPageControl = document.createElement("a");
   prevPageControl.href = "#";
+  prevPageControl.id = "prevPage";
   prevPageControl.innerHTML = `
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
             strokeLinecap="round" strokeLinejoin="round">
@@ -92,6 +95,7 @@ const renderPaginationControls = (totalJobsCount) => {
 
   const nextPageControl = document.createElement("a");
   nextPageControl.href = "#";
+  prevPageControl.id = "nextPage";
   nextPageControl.innerHTML = `
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
           strokeLinecap="round" strokeLinejoin="round"
@@ -103,6 +107,16 @@ const renderPaginationControls = (totalJobsCount) => {
 
   paginationControls.map((pControl) => {
     paginationContainer.appendChild(pControl);
+  });
+};
+
+const activePage = (pageNumber) => {
+  const paginationControls = document.querySelectorAll(".paginationControl");
+  paginationControls.forEach((pControl) => {
+    pControl.classList.toggle(
+      "active",
+      (pageNumber === pControl.innerText) === true
+    );
   });
 };
 
@@ -168,7 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       fetchJobs().then((res) => {
         jobs = res;
-        renderJobs(1);
+        renderJobs();
+        renderPaginationControls(jobs.length);
+        activePage("1");
       });
     }, 2500);
 
@@ -184,9 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //pagination
 document.querySelector(".pagination").addEventListener("click", (e) => {
   e.preventDefault();
-  let paginationControl = e.target;
-  let pageToRender = paginationControl.innerText;
+  let pageToRender = e.target.innerText;
   renderJobs(pageToRender);
+  activePage(pageToRender);
 });
-
-// work on css active pagination
