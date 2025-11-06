@@ -91,11 +91,13 @@ const renderPaginationControls = (totalJobsCount) => {
             <path d="M15 6l-6 6l6 6" />
         </svg>
   `;
+
+  prevPageControl.addEventListener("click", handlePrevPage);
   paginationControls.unshift(prevPageControl);
 
   const nextPageControl = document.createElement("a");
   nextPageControl.href = "#";
-  prevPageControl.id = "nextPage";
+  nextPageControl.id = "nextPage";
   nextPageControl.innerHTML = `
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
           strokeLinecap="round" strokeLinejoin="round"
@@ -103,6 +105,7 @@ const renderPaginationControls = (totalJobsCount) => {
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M9 6l6 6l-6 6" />
         </svg>`;
+  nextPageControl.addEventListener("click", handleNextPage);
   paginationControls.push(nextPageControl);
 
   paginationControls.map((pControl) => {
@@ -110,14 +113,24 @@ const renderPaginationControls = (totalJobsCount) => {
   });
 };
 
-const activePage = (pageNumber) => {
+const activePage = (pageNumber = 1) => {
   const paginationControls = document.querySelectorAll(".paginationControl");
+  const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE);
+
   paginationControls.forEach((pControl) => {
     pControl.classList.toggle(
       "active",
-      (pageNumber === pControl.innerText) === true
+      (pageNumber === parseInt(pControl.innerText)) === true
     );
   });
+
+  document
+    .querySelector("#prevPage")
+    .classList.toggle("disabled", (pageNumber === 1) === true);
+
+  document
+    .querySelector("#nextPage")
+    .classList.toggle("disabled", (pageNumber === totalPages) === true);
 };
 
 // main search form event listener
@@ -184,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
         jobs = res;
         renderJobs();
         renderPaginationControls(jobs.length);
-        activePage("1");
+        activePage();
       });
     }, 2500);
 
@@ -200,7 +213,30 @@ document.addEventListener("DOMContentLoaded", () => {
 //pagination
 document.querySelector(".pagination").addEventListener("click", (e) => {
   e.preventDefault();
-  let pageToRender = e.target.innerText;
-  renderJobs(pageToRender);
-  activePage(pageToRender);
+  if (e.target.classList.contains("paginationControl")) {
+    let pageToRender = parseInt(e.target.innerText);
+    renderJobs(pageToRender);
+    activePage(pageToRender);
+  }
 });
+
+const handleNextPage = (e) => {
+  e.preventDefault();
+  const current = parseInt(
+    document.querySelector(".paginationControl.active")?.innerText || 1
+  );
+  const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE);
+  const newPage = Math.min(totalPages, current + 1);
+  renderJobs(newPage);
+  activePage(newPage);
+};
+
+const handlePrevPage = (e) => {
+  e.preventDefault();
+  const current = parseInt(
+    document.querySelector(".paginationControl.active")?.innerText || 1
+  );
+  const newPage = Math.max(1, current - 1);
+  renderJobs(newPage);
+  activePage(newPage);
+};

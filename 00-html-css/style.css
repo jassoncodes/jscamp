@@ -477,7 +477,6 @@ output {
     button.is-applied {
         background: #4caf50;
         pointer-events: none;
-
         transition: background .75s;
     }
 
@@ -515,6 +514,10 @@ output {
 
     svg {
         display: flex;
+    }
+
+    .disabled {
+        pointer-events: none;
     }
 }
 
