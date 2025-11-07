@@ -176,7 +176,8 @@ const jobSearchForm = document.querySelector("#jobs-search-form");
 //search results page form event listener
 jobSearchForm?.addEventListener("submit", (e) => {
   e.preventDefault();
-  jobSearchForm.submit();
+  console.log(e);
+  // jobSearchForm.submit();
 });
 
 //search results page filters event listener
@@ -211,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //pagination
-document.querySelector(".pagination").addEventListener("click", (e) => {
+document.querySelector(".pagination")?.addEventListener("click", (e) => {
   e.preventDefault();
   if (e.target.classList.contains("paginationControl")) {
     let pageToRender = parseInt(e.target.innerText);
