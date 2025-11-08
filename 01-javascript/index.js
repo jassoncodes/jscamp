@@ -174,6 +174,7 @@ const filterJobs = (filter) => {
 const jobSearchForm = document.querySelector("#jobs-search-form");
 
 //search results page form event listener
+// Evento para la busqueda dentro de la pagina
 jobSearchForm?.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log(e);
@@ -207,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchBar = document.getElementById("job-search-bar");
     if (search && searchBar) {
       searchBar.value = decodeURIComponent(search);
+      // run the search
     }
   }
 });
