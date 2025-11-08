@@ -133,6 +133,26 @@ const activePage = (pageNumber = 1) => {
     .classList.toggle("disabled", (pageNumber === totalPages) === true);
 };
 
+/**
+ * Perform search
+ * @param {string} filter
+ */
+const searchJobs = (filter = "") => {
+  fetchJobs().then((res) => {
+    if (filter) {
+      const filteredJobs = res.filter((job) =>
+        job.titulo.toLowerCase().includes(filter.toLocaleLowerCase())
+      );
+      jobs = filteredJobs;
+    } else {
+      jobs = res;
+    }
+    renderJobs();
+    renderPaginationControls(jobs.length);
+    activePage();
+  });
+};
+
 // main search form event listener
 const mainSearchForm = document.querySelector("#main-search-form");
 
@@ -195,20 +215,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // validacion para que se ejecute solo en la pagina de search-results
   if (jobSearchForm) {
     setTimeout(() => {
-      fetchJobs().then((res) => {
-        jobs = res;
-        renderJobs();
-        renderPaginationControls(jobs.length);
-        activePage();
-      });
+      // Call search function
+      searchJobs();
     }, 2500);
 
     const params = new URLSearchParams(window.location.search);
-    const search = params.get("search");
+    const searchValue = params.get("search");
     const searchBar = document.getElementById("job-search-bar");
-    if (search && searchBar) {
-      searchBar.value = decodeURIComponent(search);
+    if (searchValue && searchBar) {
+      searchBar.value = decodeURIComponent(searchValue);
       // run the search
+      searchJobs(searchValue);
     }
   }
 });
