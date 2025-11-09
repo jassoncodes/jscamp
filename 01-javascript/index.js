@@ -1,7 +1,35 @@
-import "./devjobs-element.js";
+const RESULTS_PER_PAGE = 6;
 
-const RESULTS_PER_PAGE = 3;
-let jobs = [];
+const JobApp = {
+  jobs: [],
+  async init() {
+    const jobSearchForm = document.querySelector("#jobs-search-form");
+    if (!jobSearchForm) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const searchValue = params.get("search") || "";
+    setTimeout(() => {
+      this.getJobs(searchValue);
+    }, 1500);
+  },
+  async getJobs(filter = "") {
+    try {
+      const data = await fetchJobs();
+
+      this.jobs = filter
+        ? data.filter((job) =>
+            job.titulo.toLowerCase().includes(filter.toLocaleLowerCase())
+          )
+        : data;
+
+      renderJobs();
+      renderPaginationControls(this.jobs.length);
+      activePage();
+    } catch (error) {
+      console.error("Error loading jobs: ", error);
+    }
+  },
+};
 
 /**
  * Fetchs jobs data
@@ -16,7 +44,7 @@ const fetchJobs = async () => {
  * @param {json} jobsData jobs list
  * @returns jobs articles elements
  */
-const fortmatJobsArticle = (jobsData) => {
+const formatJobsArticle = (jobsData) => {
   return jobsData.map((job) => {
     //construct article
     const jobDataTech = Array.isArray(job.data.technology)
@@ -30,12 +58,12 @@ const fortmatJobsArticle = (jobsData) => {
     article.dataset.nivel = job.data.nivel;
 
     article.innerHTML = `
-          <article>
+          <div>
             <h3>${job.titulo}</h3>
             <span>${jobDataTech}</span>
             <span>${job.ubicacion}</span>
             <p>${job.descripcion}</p>
-          </article>
+          </div>
           <button class="apply-job-btn secondary-button">Aplicar</button>
         `;
     return article;
@@ -54,11 +82,16 @@ const renderJobs = (page = 1) => {
   // prepare pagination
   let startIndex = (page - 1) * RESULTS_PER_PAGE;
   let endIndex = startIndex + RESULTS_PER_PAGE;
-  const jobsData = jobs.slice(startIndex, endIndex);
-  const jobsToRender = fortmatJobsArticle(jobsData);
-  jobsToRender.map((job) => {
-    jobsContainer.appendChild(job);
+
+  const jobsData = JobApp.jobs.slice(startIndex, endIndex);
+  const jobsToRender = formatJobsArticle(jobsData);
+
+  const fragment = document.createDocumentFragment();
+
+  jobsToRender.forEach((job) => {
+    fragment.appendChild(job);
   });
+  jobsContainer.appendChild(fragment);
 };
 
 /**
@@ -115,7 +148,7 @@ const renderPaginationControls = (totalJobsCount) => {
 
 const activePage = (pageNumber = 1) => {
   const paginationControls = document.querySelectorAll(".paginationControl");
-  const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE);
+  const totalPages = Math.ceil(JobApp.jobs.length / RESULTS_PER_PAGE);
 
   paginationControls.forEach((pControl) => {
     pControl.classList.toggle(
@@ -161,7 +194,6 @@ document
 const filterJobs = (filter) => {
   const jobs = document.querySelectorAll(".job-card");
   jobs.forEach((job) => {
-    console.log(job.getAttribute("data-tech").includes(filter));
     const isShown =
       filter === "" ||
       filter === job.getAttribute("data-modalidad") ||
@@ -171,64 +203,46 @@ const filterJobs = (filter) => {
   });
 };
 
-const jobSearchForm = document.querySelector("#jobs-search-form");
-
-//search results page form event listener
-// Evento para la busqueda dentro de la pagina
-jobSearchForm?.addEventListener("submit", (e) => {
+document.querySelector("#job-search-bar")?.addEventListener("keyup", (e) => {
   e.preventDefault();
-  console.log(e);
-  // jobSearchForm.submit();
+
+  const searchBar = document.querySelector("#job-search-bar");
+  if (searchBar.value === "") {
+    JobApp.getJobs();
+  }
+  if (searchBar.value.length >= 5) {
+    JobApp.getJobs(searchBar.value);
+  }
 });
 
 //search results page filters event listener
 document.querySelectorAll(".filter").forEach((filter) => {
   filter.addEventListener("change", (e) => {
     e.preventDefault();
+
     filterJobs(e.target.value);
-    // jobSearchForm.submit();
   });
 });
 
-//search result page content load event listener
-document.addEventListener("DOMContentLoaded", () => {
-  // validacion para que se ejecute solo en la pagina de search-results
-  if (jobSearchForm) {
-    setTimeout(() => {
-      fetchJobs().then((res) => {
-        jobs = res;
-        renderJobs();
-        renderPaginationControls(jobs.length);
-        activePage();
-      });
-    }, 2500);
-
-    const params = new URLSearchParams(window.location.search);
-    const search = params.get("search");
-    const searchBar = document.getElementById("job-search-bar");
-    if (search && searchBar) {
-      searchBar.value = decodeURIComponent(search);
-      // run the search
-    }
-  }
-});
+document.addEventListener("DOMContentLoaded", () => JobApp.init());
 
 //pagination
 document.querySelector(".pagination")?.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("paginationControl")) return;
+
   e.preventDefault();
-  if (e.target.classList.contains("paginationControl")) {
-    let pageToRender = parseInt(e.target.innerText);
-    renderJobs(pageToRender);
-    activePage(pageToRender);
-  }
+  const pageToRender = parseInt(e.target.innerText);
+  renderJobs(pageToRender);
+  activePage(pageToRender);
 });
 
 const handleNextPage = (e) => {
   e.preventDefault();
+  e.stopPropagation();
   const current = parseInt(
     document.querySelector(".paginationControl.active")?.innerText || 1
   );
-  const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE);
+  const totalPages = Math.ceil(JobApp.jobs.length / RESULTS_PER_PAGE);
   const newPage = Math.min(totalPages, current + 1);
   renderJobs(newPage);
   activePage(newPage);
@@ -236,6 +250,7 @@ const handleNextPage = (e) => {
 
 const handlePrevPage = (e) => {
   e.preventDefault();
+  e.stopPropagation();
   const current = parseInt(
     document.querySelector(".paginationControl.active")?.innerText || 1
   );
