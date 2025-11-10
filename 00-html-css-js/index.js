@@ -1,3 +1,22 @@
+const menuToggle = document.getElementById("menu-toggle");
+const menu = document.querySelector(".menu");
+
+menuToggle.addEventListener("click", () => {
+  menu.classList.toggle("active");
+});
+
+document.addEventListener("click", (e) => {
+  if (!menu.contains(e.target) && !menuToggle.contains(e.target)) {
+    menu.classList.remove("active");
+  }
+});
+
+menu
+  .querySelectorAll("a")
+  .forEach((link) =>
+    link.addEventListener("click", () => menu.classList.remove("active"))
+  );
+
 const RESULTS_PER_PAGE = 6;
 
 const JobApp = {
@@ -36,7 +55,7 @@ const JobApp = {
  * @returns jobs
  */
 const fetchJobs = async () => {
-  return await fetch("./data.json").then((result) => result.json());
+  return await fetch("./data/data.json").then((result) => result.json());
 };
 
 /**
