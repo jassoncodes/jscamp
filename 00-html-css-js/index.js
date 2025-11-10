@@ -185,6 +185,26 @@ const activePage = (pageNumber = 1) => {
     .classList.toggle("disabled", (pageNumber === totalPages) === true);
 };
 
+/**
+ * Perform search
+ * @param {string} filter
+ */
+const searchJobs = (filter = "") => {
+  fetchJobs().then((res) => {
+    if (filter) {
+      const filteredJobs = res.filter((job) =>
+        job.titulo.toLowerCase().includes(filter.toLocaleLowerCase())
+      );
+      jobs = filteredJobs;
+    } else {
+      jobs = res;
+    }
+    renderJobs();
+    renderPaginationControls(jobs.length);
+    activePage();
+  });
+};
+
 // main search form event listener
 const mainSearchForm = document.querySelector("#main-search-form");
 
