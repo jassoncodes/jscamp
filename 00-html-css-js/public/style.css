@@ -127,6 +127,7 @@ header {
     header {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
         align-items: center;
     }
 
@@ -141,6 +142,13 @@ header {
         z-index: 1000;
         border-top: 1px solid var(--primary);
         text-align: center;
+    }
+
+    .header-actions {
+        display: flex;
+        background: var(--background);
+        flex-direction: column;
+        width: 100%;
     }
 
     .menu.active {
@@ -164,11 +172,6 @@ header {
 
     #menu-toggle {
         display: block;
-    }
-
-    .header-actions {
-        display: none;
-        /* puedes ocultarlos o moverlos dentro del menú si prefieres */
     }
 }
 
