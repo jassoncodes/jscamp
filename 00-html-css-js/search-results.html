@@ -13,25 +13,27 @@
 
     <!-- Header -->
     <header>
-        <h2>DevJobs</h2>
-        <nav class="menu">
+        <h2 class="logo">DevJobs</h2>
+
+        <!-- botón hamburguesa -->
+        <button id="menu-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-menu">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M4 8l16 0" />
+                <path d="M4 16l16 0" />
+            </svg>
+        </button>
+        <nav id="mainNav" class="menu" role="navigation">
             <a href="./index.html">Inicio</a>
             <a href="./search-results.html">Buscar</a>
             <a href="./search-results.html">Empleos</a>
             <a href="#">Salarios</a>
         </nav>
-        <div>
-            <a class="nav-button" href="#">Subir CV</a>
-            <a href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-user-circle">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                    <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                    <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-                </svg>
-            </a>
+        <div class="header-actions">
+            <a class="menu-button" href="#">Publicar un empleo</a>
+            <a class="menu-button secondary" href="#">Iniciar sesion</a>
         </div>
     </header>
 
@@ -43,7 +45,7 @@
             <p>Explora miles de oportunidades en el sector tecnologico</p>
         </header>
         <search>
-            <form action="" role="search" id="jobs-search-form">
+            <form role="search" id="jobs-search-form">
                 <div class="job-search-bar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -121,6 +123,8 @@
     <!-- Page Footer -->
     <footer>
         <small>&copy; DevJobs. Todos los derechos reservados.</small>
+        <small>This is not a real website to find jobs. This is a practice project. Hopefully will get <a
+                href="https://linkedin.com/in/jassoncodes">ME</a> a job</small>
     </footer>
 
 </body>

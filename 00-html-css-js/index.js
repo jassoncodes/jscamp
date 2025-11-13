@@ -17,7 +17,7 @@ menu
     link.addEventListener("click", () => menu.classList.remove("active"))
   );
 
-const RESULTS_PER_PAGE = 6;
+const RESULTS_PER_PAGE = 3;
 
 const JobApp = {
   jobs: [],
@@ -42,7 +42,7 @@ const JobApp = {
         : data;
 
       renderJobs();
-      renderPaginationControls(this.jobs.length);
+      renderPaginationControls();
       activePage();
     } catch (error) {
       console.error("Error loading jobs: ", error);
@@ -98,6 +98,14 @@ const renderJobs = (page = 1) => {
   const jobsContainer = document.querySelector(".search-results-container");
   jobsContainer.innerHTML = "";
 
+  if (JobApp.jobs.length === 0) {
+    const disclaimer = document.createElement("span");
+    disclaimer.innerText = "No se han encontrado resultados";
+    disclaimer.classList.add("disclaimer");
+    jobsContainer.appendChild(disclaimer);
+    return;
+  }
+
   // prepare pagination
   let startIndex = (page - 1) * RESULTS_PER_PAGE;
   let endIndex = startIndex + RESULTS_PER_PAGE;
@@ -117,10 +125,13 @@ const renderJobs = (page = 1) => {
  * Renders pagination controls
  * @param {int} totalJobsCount
  */
-const renderPaginationControls = (totalJobsCount) => {
-  const totalPages = Math.ceil(totalJobsCount / RESULTS_PER_PAGE);
+const renderPaginationControls = () => {
   const paginationContainer = document.querySelector(".pagination");
   paginationContainer.innerHTML = "";
+
+  if (JobApp.jobs.length === 0) return;
+
+  const totalPages = Math.ceil(JobApp.jobs.length / RESULTS_PER_PAGE);
   let paginationControls = [];
 
   // creating pagination control elements
@@ -178,11 +189,11 @@ const activePage = (pageNumber = 1) => {
 
   document
     .querySelector("#prevPage")
-    .classList.toggle("disabled", (pageNumber === 1) === true);
+    ?.classList.toggle("disabled", (pageNumber === 1) === true);
 
   document
     .querySelector("#nextPage")
-    .classList.toggle("disabled", (pageNumber === totalPages) === true);
+    ?.classList.toggle("disabled", (pageNumber === totalPages) === true);
 };
 
 /**
@@ -200,7 +211,7 @@ const searchJobs = (filter = "") => {
       jobs = res;
     }
     renderJobs();
-    renderPaginationControls(jobs.length);
+    renderPaginationControls();
     activePage();
   });
 };

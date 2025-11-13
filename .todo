@@ -13,3 +13,11 @@
 - [ ] Dynamic pagination
 - [ ] Pagina del detalle de la oferta
 - [ ] Implement react
+
+SPA without dependencies
+
+- Use a custom hook to create the navigation functionality
+- Crear un componente rout (path, componente), si currentPath != path recibido, return null, sino renderiza componente recibido
+- Componetizar la app con react
+- useSearchForm hook para formulario de home screen y de search page
+- sincronizar url con el estado al cambio en los filtros
