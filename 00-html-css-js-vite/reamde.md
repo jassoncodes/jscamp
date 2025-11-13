@@ -1,6 +1,6 @@
 # DevJobs
 
-🚀 [Deployed on Netlify](https://jscam-devjobs-mpa.netlify.app/)
+🚀 [Deployed on Netlify](https://jscamp-devjobs-mpa.netlify.app/)
 
 💻 Multi-Page Application developed with HTML+CSS+JS
 
