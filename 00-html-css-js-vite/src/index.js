@@ -55,7 +55,9 @@ const JobApp = {
  * @returns jobs
  */
 const fetchJobs = async () => {
-  return await fetch("./data/data.json").then((result) => result.json());
+  return await fetch("./public/data/data.json", { cache: "no-store" }).then(
+    (result) => result.json()
+  );
 };
 
 /**
