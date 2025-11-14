@@ -1,5 +1,7 @@
 import React from 'react'
 
+const MENU = []
+
 export const Header = () =>
 {
     return (
