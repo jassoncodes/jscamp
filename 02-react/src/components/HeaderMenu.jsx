@@ -16,10 +16,10 @@ import React from 'react'
 export const HeaderMenu = ({ options }) =>
 {
     return (
-        <nav id="mainNav" class="menu" role="navigation">
+        <nav id="mainNav" className="menu" role="navigation">
             {options.map((option) =>
             {
-                <a href={option.ref} id={option.id}>{option.label}</a>
+                return <a href={option.ref} key={option.label.toLocaleLowerCase()}>{option.label}</a>
             })}
         </nav>
     )
