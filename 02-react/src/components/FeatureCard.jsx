@@ -1,20 +1,22 @@
-import React from 'react'
+import React from "react"
 
-export const FeatureCard = () =>
+import { Briefcase } from "../components/svg/Briefcase";
+import { Bills } from "../components/svg/Bills";
+import { Community } from "../components/svg/Community";
+
+const icons = {
+    bills: <Bills />,
+    briefcase: <Briefcase />,
+    community: <Community />
+}
+
+export const FeatureCard = ({ feature }) =>
 {
     return (
-        <article class="card">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                class="icon icon-tabler icons-tabler-outline icon-tabler-briefcase">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" />
-                <path d="M12 12l0 .01" />
-                <path d="M3 13a20 20 0 0 0 18 0" />
-            </svg>
-            <h3>Encuentra el trabajo de tus sueños</h3>
-            <p>Busca miles de empleos de las mejores empresas de todo el mundo</p>
+        <article className="card">
+            {icons[feature.icon]}
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
         </article>
     )
 }
