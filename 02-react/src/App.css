@@ -580,3 +580,11 @@ output {
     }
   }
 }
+
+
+.offerBody {
+  display: flex;
+  flex-direction: column;
+  padding: 0 6rem;
+  gap: 2rem;
+}

@@ -7,13 +7,9 @@ import { Footer } from '../components/Footer'
 export const Home = () =>
 {
     return (
-        <>
-            <Header />
-            <main>
-                <Hero />
-                <Features />
-            </main>
-            <Footer />
-        </>
+        <main>
+            <Hero />
+            <Features />
+        </main>
     )
 }

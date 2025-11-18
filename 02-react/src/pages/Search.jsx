@@ -21,30 +21,26 @@ const jobArticle = {
 export const Search = () =>
 {
     return (
-        <>
-            <Header />
-            <main className="results-page">
-                <header>
-                    <img src="./job-search-background.webp" alt="job-search" />
-                    <h1>Encuentra tu proximo trabajo</h1>
-                    <p>Explora miles de oportunidades en el sector tecnologico</p>
-                </header>
-                <search>
-                    <SearchForm />
-                </search>
-                <h2>Resultados de la busqueda</h2>
-                <output className="search-results-container">
-                    {/* <Spinner /> */}
-                    {/* <!-- render here JobCard with jobs data fetched dynamicaly --> */}
-                    <JobCard job={jobArticle} />
-                </output>
+        <main className="results-page">
+            <header>
+                <img src="./job-search-background.webp" alt="job-search" />
+                <h1>Encuentra tu proximo trabajo</h1>
+                <p>Explora miles de oportunidades en el sector tecnologico</p>
+            </header>
+            <search>
+                <SearchForm />
+            </search>
+            <h2>Resultados de la busqueda</h2>
+            <output className="search-results-container">
+                {/* <Spinner /> */}
+                {/* <!-- render here JobCard with jobs data fetched dynamicaly --> */}
+                <JobCard job={jobArticle} />
+            </output>
 
-                {/* <!-- pagination--> */}
-                <nav className="pagination">
-                </nav>
+            {/* <!-- pagination--> */}
+            <nav className="pagination">
+            </nav>
 
-            </main>
-            <Footer />
-        </>
+        </main>
     )
 }
