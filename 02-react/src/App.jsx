@@ -12,8 +12,9 @@ function App()
 
   return (
     <Layout>
-      {/* <OfferDetails /> */}
+
       <OfferDetails />
+      {/* <Home /> */}
     </Layout>
   )
 }

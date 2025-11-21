@@ -274,6 +274,7 @@ footer {
   display: flex;
   flex-direction: column;
   text-align: center;
+  max-height: 20px;
 
   small {
     color: var(--text-muted);
@@ -489,6 +490,70 @@ output {
 /* end search-results page styles */
 
 
+/* offer details page */
+.offerPage {
+  display: flex;
+  flex-direction: column;
+  padding: 0 6rem;
+  gap: 1.25rem;
+
+  span {
+    padding-right: 2px;
+  }
+
+  span:not(:last-of-type):after {
+    content: " | ";
+  }
+}
+
+.breadscrumbs {
+  padding: 0;
+
+  span {
+    padding-right: 2px;
+  }
+
+  span:not(:last-of-type):after {
+    content: " / ";
+  }
+}
+
+.offerPage>*:not(:first-child) {
+  padding: 0 1.5rem;
+}
+
+.offerHeader {
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  transition: background-color 0.2s;
+  padding: 0;
+  text-align: start;
+  align-items: start;
+}
+
+ul {
+  display: inline-block;
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  gap: .35rem;
+  align-content: center;
+}
+
+section.applySection {
+  border-top: .05px solid var(--border);
+  text-align: end;
+  padding: 2rem 2rem;
+}
+
+
+/* end offer details page */
+
+
 
 /* media querys */
 @media (max-width: 768px) {
@@ -579,12 +644,31 @@ output {
       margin-right: 0;
     }
   }
-}
 
+  .offerPage {
+    padding: 1rem 1.5rem;
+  }
 
-.offerBody {
-  display: flex;
-  flex-direction: column;
-  padding: 0 6rem;
-  gap: 2rem;
+  .offerPage>*:not(:first-child) {
+    padding: 0 1.75rem;
+  }
+
+  .breadscrumbs {
+    font-size: 12px;
+  }
+
+  .offerPage section {
+    text-align: justify;
+  }
+
+  .offerHeader {
+    justify-content: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
+
+  section.applySection {
+    text-align: center;
+  }
+
 }
