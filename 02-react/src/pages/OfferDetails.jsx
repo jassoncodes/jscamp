@@ -24,13 +24,17 @@ export const OfferDetails = () =>
                     <span>Empleos</span><span>Ingeniero de Software</span>
                 </div>
                 <div className='positionHeader'>
-                    <div>
+                    <div className='positionTitle'>
                         <h2>{offer.titulo}</h2>
                         <span>Company</span><span>Modalidad</span>
                     </div>
-                    <button className="apply-job-btn secondary-button">Aplicar</button>
+                    <button className="apply-job-btn secondary-button">Aplicar ahora</button>
                 </div>
             </header>
+
+
+
+
             <section className='offerDescription'>
                 <h3>Descripcion del puesto</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae hic, nihil est pariatur molestias officiis, laborum expedita tempore cupiditate eveniet mollitia excepturi quo necessitatibus quod? Reiciendis sequi quibusdam quis incidunt!</p>

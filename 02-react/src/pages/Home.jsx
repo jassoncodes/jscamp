@@ -9,7 +9,7 @@ export const Home = () =>
     return (
         <main>
             <Hero />
-            <Features />
+            {/* <Features /> */}
         </main>
     )
 }

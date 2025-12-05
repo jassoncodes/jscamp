@@ -1,7 +1,24 @@
-* {
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  height: 100%;
+}
+
+div#root {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 :root {
@@ -34,7 +51,5 @@ body {
   background-color: var(--background);
   color: var(--text-primary);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   line-height: 1.6;
 }
